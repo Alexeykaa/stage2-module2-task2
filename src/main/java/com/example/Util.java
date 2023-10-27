@@ -1,7 +1,6 @@
 package com.example;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class Util {
 
@@ -17,10 +16,7 @@ public class Util {
     }
 
     public static void deleteUserSession(HttpServletRequest req) {
-        HttpSession session = req.getSession(false);
-        if (session != null) {
-            session.removeAttribute(USER_SESSION_ATTRIBUTE);
-        }
+        req.getSession().removeAttribute(USER_SESSION_ATTRIBUTE);
     }
 
     public static void setUserSession(HttpServletRequest req, String login) {
@@ -28,10 +24,7 @@ public class Util {
     }
 
     public static void invalidateSession(HttpServletRequest req) {
-        HttpSession session = req.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
+        req.getSession().invalidate();
     }
 
     public static boolean isNotEmpty(String str) {
