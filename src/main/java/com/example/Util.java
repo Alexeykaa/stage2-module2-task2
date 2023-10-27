@@ -1,6 +1,7 @@
 package com.example;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class Util {
 
@@ -11,12 +12,15 @@ public class Util {
     public static final String HELLO_JSP = "/user/hello.jsp";
     public static final String SERVLET_TIME_INIT_CONTEXT_ATTRIBUTE = "servletTimeInit";
 
-    public static boolean isUserExist(HttpServletRequest req) {
-        return req.getSession().getAttribute(USER_SESSION_ATTRIBUTE) != null;
+    public static boolean isNotUserExist(HttpServletRequest req) {
+        return req.getSession().getAttribute(USER_SESSION_ATTRIBUTE) == null;
     }
 
     public static void deleteUserSession(HttpServletRequest req) {
-        req.getSession().removeAttribute(USER_SESSION_ATTRIBUTE);
+        HttpSession session = req.getSession(false);
+        if (session != null) {
+            session.removeAttribute(USER_SESSION_ATTRIBUTE);
+        }
     }
 
     public static void setUserSession(HttpServletRequest req, String login) {
@@ -24,7 +28,10 @@ public class Util {
     }
 
     public static void invalidateSession(HttpServletRequest req) {
-        req.getSession().invalidate();
+        HttpSession session = req.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
     }
 
     public static boolean isNotEmpty(String str) {

@@ -17,7 +17,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        if (Util.isUserExist(req)) {
+        if (Util.isNotUserExist(req)) {
             redirect(req, resp, Util.LOGIN_JSP);
         } else {
             redirect(req, resp, Util.HELLO_JSP);

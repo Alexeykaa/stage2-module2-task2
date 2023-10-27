@@ -13,7 +13,7 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        if (!Util.isUserExist(req)) {
+        if (Util.isNotUserExist(req)) {
             resp.sendRedirect(req.getContextPath().concat(Util.LOGIN_JSP));
         }
 
