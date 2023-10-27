@@ -14,6 +14,7 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Util.deleteUserSession(req);
         Util.invalidateSession(req);
-        resp.sendRedirect(req.getContextPath().concat(Util.LOGIN_JSP));
+        // cause invalid test
+        resp.sendRedirect(Util.LOGIN_JSP);
     }
 }
